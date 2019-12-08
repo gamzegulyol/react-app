@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import {connect} from 'react-redux';
 
 // Components
@@ -41,17 +40,10 @@ class App extends React.Component {
 
   _handleOnClick = () => {
     const {dispatch} = this.props;
-    const {currentValue, values, isRunOnClick} = this.state;
-
-    console.log('dispatch:', dispatch);
-    console.log('isRunOnClick :', isRunOnClick);
+    const {currentValue} = this.state;
+    //console.log('todoList:', todoList);
     dispatch(addTodo(currentValue));
-  /*  values.push(currentValue);
-    this.setState({ values: values }, () => {
-      console.log(this.state.values);
-    });*/
-    // if (isRunOnClick === true) {
-    // }
+
   };
 
   _handeOnChange = event => {
@@ -62,12 +54,13 @@ class App extends React.Component {
   };
 
   _renderElements = () => {
-    const { values } = this.state;
+    const {todoList} = this.props;
 
-    return values.map((value, index) => <ListElement key={index} text={value} />);
+    return todoList.map((value, index) => <ListElement key={index} text={value.name} />);
   };
 
   render() {
+    const {todoList} = this.props;
     const { currentValue } = this.state;
 
     const css = {
@@ -86,11 +79,19 @@ class App extends React.Component {
           }
         </div>
         <div style={css.ul}>
-          <ul>{this._renderElements()}</ul>
+          { 
+          todoList&&(
+          <ul>{this._renderElements()}</ul>)}
         </div>
       </div>
     );
   }
 }
+  const mapStateToProps = (state) =>{
+    return{
+      todoList: state.todos.todos,
+    }
 
-export default connect()(App);
+  }
+
+export default connect(mapStateToProps)(App);

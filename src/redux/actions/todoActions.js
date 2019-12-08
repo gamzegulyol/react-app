@@ -1,6 +1,6 @@
 const addTodo = todo =>{
     const result = {
-        type: 'add_todo',
+        type: 'todo/add_todo',
         data : todo
     }
     return result;

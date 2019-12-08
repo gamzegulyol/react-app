@@ -1,11 +1,20 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
 
-const ListElement = ({ text = "text" }) => {
+const ListElement = ({ text = "text",todoList }) => {
   return (
     <Fragment>
-      <li>{text}</li>
+      {todoList.map(value => (
+      <li>{text}</li>))}
     </Fragment>
   );
 };
 
-export default ListElement;
+const mapStateToProps = state =>{
+  return {
+    todoList : state.todos.todos
+  };
+}
+
+
+export default connect()(ListElement);
