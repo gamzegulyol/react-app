@@ -1,5 +1,5 @@
-  
-import {combineReducers} from "redux";
-export default combineReducers({todos:{
-    test:'test'
-}});
+  import {combineReducers } from 'redux'
+  import todoReducer from './todoReducer';
+
+
+export default combineReducers({ todos: todoReducer });;

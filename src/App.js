@@ -1,10 +1,14 @@
 import React from "react";
 import "./App.css";
+import {connect} from 'react-redux';
 
 // Components
 import Button from "./components/Button";
 import Input from "./components/Input";
 import ListElement from "./components/ListElement";
+
+//action
+import {addTodo} from './redux/actions/todoActions';
 
 class App extends React.Component {
   state = {
@@ -36,13 +40,16 @@ class App extends React.Component {
   }
 
   _handleOnClick = () => {
-    const { currentValue, values, isRunOnClick } = this.state;
+    const {dispatch} = this.props;
+    const {currentValue, values, isRunOnClick} = this.state;
 
+    console.log('dispatch:', dispatch);
     console.log('isRunOnClick :', isRunOnClick);
-    values.push(currentValue);
+    dispatch(addTodo(currentValue));
+  /*  values.push(currentValue);
     this.setState({ values: values }, () => {
       console.log(this.state.values);
-    });
+    });*/
     // if (isRunOnClick === true) {
     // }
   };
@@ -86,4 +93,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect()(App);
